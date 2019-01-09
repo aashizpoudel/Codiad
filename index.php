@@ -25,6 +25,10 @@ if(isset($_SESSION['theme'])) {
 <!doctype html>
 
 <head>
+	<!-- 
+	This version of Codiad is a fork of Codiad/Codiad as that project seems abandonded (No stable releases since 2013, but development halted in October 2018)
+	This version includes many bug fixes.
+	-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php i18n("CODIAD"); ?></title>

@@ -1,3 +1,5 @@
+**This is a fork of Codiad/Codiad. It is not official, however the original project seems to have halted. This fork aims to fix some bugs, and security issues.**
+
 # Codiad Web IDE
 
 Codiad is a web-based IDE framework with a small footprint and minimal requirements. 
