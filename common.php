@@ -86,7 +86,30 @@
             session_name(md5(BASE_PATH));
 
             session_start();
-            
+            //Some security checks, helps with securing the service
+            session_regenerate_id(true);
+			if(isset($_SESSION['user']) && isset($_SESSION['_USER_LOOSE_IP'])){
+			if($_SESSION['_USER_LOOSE_IP'] != long2ip(ip2long($_SERVER['REMOTE_ADDR']) & ip2long("255.255.0.0"))
+			|| $_SESSION['_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']
+			|| $_SESSION['_USER_ACCEPT_ENCODING'] != $_SERVER['HTTP_ACCEPT_ENCODING']
+			|| $_SESSION['_USER_ACCEPT_LANG'] != $_SERVER['HTTP_ACCEPT_LANGUAGE']){
+				//Bad session detected, let's not allow any further data to be transfered and redirect to logout.
+				session_unset(); // Same as $_SESSION = array();
+			    session_destroy(); // Destroy session on disk
+			    setcookie("sid", "", 1);
+				header("Location: index.php");
+				die();
+			}
+			$_SESSION['_USER_LAST_ACTIVITY'] = time(); //Reset user activity timer
+			} else {
+			//Store identification data so we can detect malicous logins potentially. (Like XSS)
+			$_SESSION['_USER_AGENT']           = $_SERVER['HTTP_USER_AGENT']; //Save user agent (Spoofable, so we have the other stuff below to check for as well which may or may not be a little more difficult to guess for an attacker.)
+			$_SESSION['_USER_ACCEPT_ENCODING'] = $_SERVER['HTTP_ACCEPT_ENCODING'];
+			$_SESSION['_USER_ACCEPT_LANG']     = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+			$_SESSION['_USER_LOOSE_IP'] = long2ip(ip2long($_SERVER['REMOTE_ADDR']) & ip2long("255.255.0.0"));
+			$_SESSION['_USER_LAST_ACTIVITY'] = time();
+			}
+			
             //Check for external authentification
             if(defined('AUTH_PATH')){
                 require_once(AUTH_PATH);
