@@ -87,7 +87,6 @@
 
             session_start();
             //Some security checks, helps with securing the service
-            session_regenerate_id(true);
 			if(isset($_SESSION['user']) && isset($_SESSION['_USER_LOOSE_IP'])){
 			if($_SESSION['_USER_LOOSE_IP'] != long2ip(ip2long($_SERVER['REMOTE_ADDR']) & ip2long("255.255.0.0"))
 			|| $_SESSION['_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']
