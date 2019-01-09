@@ -78,7 +78,7 @@ if(isset($_SESSION['theme'])) {
 </head>
 
 <body>
-	<script>var secureToken = "<?php if(isset($_SESSION['SECURE_TOKEN'])){echo $_SESSION['SECURE_TOKEN'];} ?></script>
+	<script>var secureToken = "<?php if(isset($_SESSION['SECURE_TOKEN'])){echo $_SESSION['SECURE_TOKEN'];} ?>"</script>
     <script>
     var i18n = (function(lang) {
         return function(word,args) {

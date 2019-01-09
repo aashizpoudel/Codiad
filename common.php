@@ -111,7 +111,7 @@
 			
 			//Only set if user is logged in.
 			if(!isset($_SESSION['SECURE_TOKEN']) && isset($_SESSION['user'])){
-				$_SESSION['SECURE_TOKEN'] = substr(base_convert(bin2hex(openssl_random_pseudo_bytes($length)), 16, 36), 0, 16);
+				$_SESSION['SECURE_TOKEN'] = bin2hex(openssl_random_pseudo_bytes(24));
 			}
 			
             //Check for external authentification
