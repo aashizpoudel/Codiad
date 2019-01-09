@@ -46,10 +46,11 @@ class User
     {
 
         $pass = false;
-        $this->EncryptPassword();
+        //Not needed with password_hash:
+        //$this->EncryptPassword();
         $users = getJSON('users.php');
         foreach ($users as $user) {
-            if ($user['username']===$this->username && password_verify($this->password, $user['password'])) {
+            if ($user['username']==$this->username && password_verify($this->password, $user['password'])) {
                 $pass = true;
                 $_SESSION['user'] = $this->username;
                 $_SESSION['lang'] = $this->lang;
@@ -63,7 +64,7 @@ class User
         if ($pass) {
             echo formatJSEND("success", array("username"=>$this->username));
         } else {
-            echo formatJSEND("error", "Incorrect Username or Password");
+            echo formatJSEND("error", "Incorrect Username or Password!");
         }
     }
 
