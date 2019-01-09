@@ -78,6 +78,7 @@ if(isset($_SESSION['theme'])) {
 </head>
 
 <body>
+	<script>var secureToken = "<?php if(isset($_SESSION['SECURE_TOKEN'])){echo $_SESSION['SECURE_TOKEN'];} ?></script>
     <script>
     var i18n = (function(lang) {
         return function(word,args) {
@@ -106,6 +107,7 @@ if(isset($_SESSION['theme'])) {
     <script src="js/jsend.js"></script>
     <script src="js/instance.js?v=<?php echo time(); ?>"></script>
     <div id="message"></div>
+    
     <?php
 
     //////////////////////////////////////////////////////////////////

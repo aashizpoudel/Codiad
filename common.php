@@ -109,6 +109,11 @@
 			$_SESSION['_USER_LAST_ACTIVITY'] = time();
 			}
 			
+			//Only set if user is logged in.
+			if(!isset($_SESSION['SECURE_TOKEN']) && isset($_SESSION['user'])){
+				$_SESSION['SECURE_TOKEN'] = substr(base_convert(bin2hex(openssl_random_pseudo_bytes($length)), 16, 36), 0, 16);
+			}
+			
             //Check for external authentification
             if(defined('AUTH_PATH')){
                 require_once(AUTH_PATH);
@@ -122,6 +127,11 @@
             }
         }
 
+		function checkToken(){
+			if(!isset($_REQUEST['stoken']) && isset($_SESSION['user'])){
+				die();
+			}
+		}
         //////////////////////////////////////////////////////////////////
         // Read Content of directory
         //////////////////////////////////////////////////////////////////
