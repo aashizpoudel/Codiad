@@ -2067,6 +2067,10 @@ define('DIFF_EQUAL', 0);
 
 define('Match_MaxBits', PHP_INT_SIZE * 8);
 
+//Inplace of the functions, confirm that PHP 7.2+ is NOT in use to load functions manually
+//Thanks to marin1993@github for the idea!
+if(intfloat(substr(PHP_VERSION,0,3))<7.2)require_once 'mb_functions.php';
+
 /*
 //COMMENTED OUT AS PHP7 INCLUDES FUNCTIONS OF SIMILAR NAMES
 
