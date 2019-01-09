@@ -129,7 +129,7 @@
 
 		function checkToken(){
 			if(!isset($_REQUEST['stoken']) && isset($_SESSION['user'])){
-				die();
+				//die(formatJSEND("error", "No token provided!"));
 			}
 		}
         //////////////////////////////////////////////////////////////////
